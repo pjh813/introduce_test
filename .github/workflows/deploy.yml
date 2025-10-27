@@ -25,15 +25,16 @@ jobs:
         run: npm install
 
       # 4. 빌드 (React/Vite 등 필요 시)
-      - name: Build project
-        run: npm run build
+      # - name: Build project
+      #   run: npm run build
         # HTML/Vanilla 프로젝트면 위 줄 삭제 가능
 
       # 5. Netlify 배포
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: .       
+          publish-dir: .      
+          #  
           production-branch: 
           - main
           - feature/minsu
