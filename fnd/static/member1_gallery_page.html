@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사진 갤러리 - 박성준</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav a {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: #1a1a1a;
+        }
+
+        .back-button {
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #374151;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #9ca3af;
+            border-bottom: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-content {
+            padding: 24px;
+        }
+
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .gallery-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .gallery-meta {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .gallery-date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .gallery-location {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Scrollable Text Section */
+        .scrollable-section {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .scrollable-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .scrollable-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .photo-story {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .photo-story:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #9ca3af;
+        }
+
+        .story-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .story-text {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            color: #6b7280;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav {
+                gap: 16px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .gallery-image {
+                aspect-ratio: 1 / 1;
+            }
+
+            .scrollable-section {
+                padding: 24px;
+            }
+
+            .scrollable-content {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">안녕하세요</div>
+            <nav class="nav">
+                <a href="member1.html">홈</a>
+                <a href="#gallery">갤러리</a>
+                <a href="#about">소개</a>
+                <a href="#contact">연락처</a>
+            </nav>
+            <a href="member1.html" class="back-button">← 홈으로</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">📸 여행</h1>
+        <p class="page-subtitle">일상의 소중한 순간들을 기록한 사진들을 만나보세요</p>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img src="../img/sj_1.jpeg" alt="사진1">
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-meta">
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>하와이</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img src="../img/sj_2.jpeg" alt="사진2">
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-meta">
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>하와이</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img src="../img/sj_3.jpeg" alt="사진3">
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-meta">
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>하와이</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img src="../img/sj_4.jpeg" alt="사진4">
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-meta">
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>하와이</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img src="../img/sj_5.jpeg" alt="사진5">
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-meta">
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>하와이</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="gallery-item">
+                <div class="gallery-image">🍂</div>
+                <div class="gallery-content">
+                    <h3 class="gallery-title">사진5</h3>
+                    <p class="gallery-description">
+                        텍스트
+                    </p>
+                    <div class="gallery-meta">
+                        <div class="gallery-date">
+                            <span>📅</span>
+                            <span>2024.10.28</span>
+                        </div>
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>설악산</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="gallery-item">
+                <div class="gallery-image">❄️</div>
+                <div class="gallery-content">
+                    <h3 class="gallery-title">사진6</h3>
+                    <p class="gallery-description">
+                        텍스트
+                    </p>
+                    <div class="gallery-meta">
+                        <div class="gallery-date">
+                            <span>📅</span>
+                            <span>2024.12.15</span>
+                        </div>
+                        <div class="gallery-location">
+                            <span>📍</span>
+                            <span>남산공원</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 박성준. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">📧</a>
+                <a href="#" class="social-link">💼</a>
+                <a href="#" class="social-link">🐙</a>
+                <a href="#" class="social-link">🐦</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
