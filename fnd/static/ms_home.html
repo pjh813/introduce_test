@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minsu’s Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* ===== 기본 설정 ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+        background: linear-gradient(to bottom right, #A7D8F0, #F7C6D9, #FFF3B0);
+        background-attachment: fixed; /* 화면 스크롤에도 배경 고정 */
+        background-repeat: no-repeat;  /* 반복 금지 */
+        background-size: cover;        /* 화면 전체 덮기 */
+        color: #333;
+        }
+
+    /* ===== 네비게이션 바 ===== */
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      background-color: rgba(255,255,255,0.7); padding:15px 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .navbar .title { font-size:24px; font-weight:bold; color:#7A6BF5; }
+    .navbar .links a { margin-left:20px; text-decoration:none; color:#444; font-weight:bold; }
+    .navbar .links a:hover { color:#7A6BF5; }
+
+    /* ===== 슬라이드 컨테이너 ===== */
+    .slider {
+      width: 80%; max-width:800px; margin:60px auto; position:relative;
+      overflow:hidden; border-radius:20px; box-shadow:0 5px 20px rgba(0,0,0,0.2);
+      /* 높이 고정 대신 종횡비 사용 (반응형) */
+      aspect-ratio: 16 / 9;
+      background: #eee;
+    }
+
+    .slides {
+      display:flex;
+      transition: transform 0.6s ease; /* 전환 시간(부드러움) */
+      height:100%;
+      will-change: transform;
+    }
+
+    .slide { min-width:100%; height:100%; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .slide img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* 컨트롤(버튼, dots) */
+    .controls { position:absolute; inset:0; pointer-events:none; }
+    .btn {
+      position:absolute; top:50%; transform:translateY(-50%); pointer-events:auto;
+      background: rgba(255,255,255,0.8); border:none; padding:10px 12px; border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.15); cursor:pointer;
+    }
+    .btn:active { transform: translateY(-50%) scale(0.98); }
+    .prev { left:12px; }
+    .next { right:12px; }
+
+    .dots {
+      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+      display:flex; gap:8px; pointer-events:auto;
+    }
+    .dot {
+      width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.8);
+      box-shadow:0 1px 3px rgba(0,0,0,0.2); cursor:pointer; opacity:0.7;
+    }
+    .dot.active { transform:scale(1.2); opacity:1; background:#7A6BF5; }
+
+    /* ===== 홈 소개 ===== */
+    .home-text { text-align:center; margin-top:40px; }
+    .home-text h2 { font-size:32px; color:#6D63E0; }
+    .home-text p { margin-top:10px; font-size:18px; color:#555; }
+
+    /* 반응형: 모바일에서 패딩 줄임 */
+    @media (max-width:600px) {
+      .navbar { padding:12px 18px; }
+      .navbar .title { font-size:18px; }
+      .slider { width:94%; margin:40px auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h1 class="title">Minsu’s Page</h1>
+    <div class="links">
+      <a href="ms_home.html">Home</a>
+      <a href="ms_profile.html">Profile</a>
+      <a href="ms_etc.html">Etc</a>
+    </div>
+  </nav>
+
+  <div class="slider" id="slider">
+    <div class="slides" id="slides">
+      <div class="slide"><img src="./../img/minsu/slide1.jpg" alt="슬라이드1"></div>
+      <div class="slide"><img src="./../img/minsu/slide2.jpg" alt="슬라이드2"></div>
+      <div class="slide"><img src="./../img/minsu/slide3.jpg" alt="슬라이드3"></div>
+      <!-- 클론은 JS가 추가합니다. HTML에 미리 복제본을 넣지 않아도 됩니다. -->
+    </div>
+
+    <div class="controls">
+      <button class="btn prev" id="prevBtn" aria-label="Previous">◀</button>
+      <button class="btn next" id="nextBtn" aria-label="Next">▶</button>
+
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+
+  <div class="home-text">
+    <h2>안녕하세요, 김민수입니다 🌤️</h2>
+    <p>새로운 경험을 좋아하고, 배움을 즐기는 개발자 지망생이에요.</p>
+  </div>
+
+  <script>
+    (function () {
+      const slidesEl = document.getElementById('slides');
+      const sliderEl = document.getElementById('slider');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsEl = document.getElementById('dots');
+
+      const INTERVAL = 5000; // 각 슬라이드 보여주는 시간(밀리초) — 여기만 바꾸세요
+      const TRANSITION_MS = 600; // CSS transition과 일치시킴
+
+      // 초기 슬라이드 요소들(원본)
+      const originalSlides = Array.from(slidesEl.querySelectorAll('.slide'));
+      const slideCount = originalSlides.length;
+      if (slideCount === 0) return;
+
+      // 1) 첫 슬라이드 복제(끝에 붙여 끊김 없는 루프 만들기)
+      const firstClone = originalSlides[0].cloneNode(true);
+      slidesEl.appendChild(firstClone);
+
+      // 2) 현재 인덱스 제어 (0 .. slideCount-1), clone 보여줄 때는 index === slideCount
+      let index = 0;
+      let timer = null;
+      let isTransitioning = false;
+
+      // 도트 생성
+      for (let i = 0; i < slideCount; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.dataset.index = i;
+        dotsEl.appendChild(d);
+      }
+
+      const dots = Array.from(dotsEl.children);
+
+      function updateDots() {
+        dots.forEach((d, i) => d.classList.toggle('active', i === index % slideCount));
+      }
+
+      function goToSlide(i, withTransition = true) {
+        if (withTransition) {
+          slidesEl.style.transition = `transform ${TRANSITION_MS}ms ease`;
+        } else {
+          slidesEl.style.transition = 'none';
+        }
+        slidesEl.style.transform = `translateX(${ -100 * i }%)`;
+      }
+
+      function next() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        index++;
+        goToSlide(index, true);
+        updateDots();
+
+        // transition 끝난 후 처리 (클론에서 원복)
+        setTimeout(() => {
+          if (index === slideCount) {
+            // 지금은 클론(첫 슬라이드 복제)을 보고 있음 -> 순간적으로 원래 위치로 이동
+            index = 0;
+            goToSlide(index, false); // transition 없이 점프
+            updateDots();
+          }
+          isTransitioning = false;
+        }, TRANSITION_MS + 20);
+      }
+
+      function prev() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        if (index === 0) {
+          // 역방향으로 자연스럽게 가려면: 마지막(실제 마지막 슬라이드)로 순간이동 후 transition 적용
+          // 구현 간단화를 위해 순간 이동 -> 애니메이션
+          slidesEl.style.transition = 'none';
+          slidesEl.style.transform = `translateX(${ -100 * slideCount }%)`; // 클론 위치(마지막 복제 위치)
+          // 강제로 리플로우 -> 이후 transition 적용해 한 칸 앞으로 이동하면 마지막 슬라이드가 보임
+          void slidesEl.offsetWidth;
+          index = slideCount - 1;
+          slidesEl.style.transition = `transform ${TRANSITION_MS}ms ease`;
+          slidesEl.style.transform = `translateX(${ -100 * index }%)`;
+          setTimeout(() => { isTransitioning = false; updateDots(); }, TRANSITION_MS + 20);
+          return;
+        }
+
+        index--;
+        goToSlide(index, true);
+        updateDots();
+        setTimeout(() => { isTransitioning = false; }, TRANSITION_MS + 20);
+      }
+
+      // 자동 재생
+      function startTimer() {
+        stopTimer();
+        timer = setInterval(next, INTERVAL);
+      }
+      function stopTimer() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      // 버튼 이벤트
+      nextBtn.addEventListener('click', () => { next(); startTimer(); });
+      prevBtn.addEventListener('click', () => { prev(); startTimer(); });
+
+      // 도트 클릭
+      dots.forEach(d => d.addEventListener('click', (e) => {
+        const targetIndex = Number(e.currentTarget.dataset.index);
+        index = targetIndex;
+        goToSlide(index, true);
+        updateDots();
+        startTimer();
+      }));
+
+      // 마우스 오버 시 일시정지
+      sliderEl.addEventListener('mouseenter', stopTimer);
+      sliderEl.addEventListener('mouseleave', startTimer);
+
+      // 초기 세팅: 첫 슬라이드 보이기
+      goToSlide(0, false);
+      updateDots();
+      startTimer();
+
+      // 반응형: 이미지 로딩/리사이즈 시 높이 문제 방지(옵션)
+      window.addEventListener('resize', () => { /* 필요시 추가 처리 */ });
+    })();
+  </script>
+</body>
+</html>
