@@ -27,7 +27,7 @@ jobs:
       # 4. 빌드 (React/Vite 등 필요 시)
       # - name: Build project
       #   run: npm run build
-        # HTML/Vanilla 프로젝트면 위 줄 삭제 가능
+      # HTML/Vanilla 프로젝트면 위 줄 삭제 가능
 
       # 5. Netlify 배포
       - name: Deploy to Netlify
