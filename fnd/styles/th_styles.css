@@ -1,0 +1,93 @@
+/* styles.css */
+
+/* 5. External CSS: 공통 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.page-title {
+    color: #007BFF;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #e0f7fa;
+}
+
+/* 네비게이션 스타일 */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+nav li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #575757;
+}
+
+/* 섹션 스타일 */
+.section, .hobbies {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 이미지 스타일 */
+.intro-image, .project-image, .contact-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin: 10px 5px;
+    border: 1px solid #ddd;
+    /* 3. Image 5개 이상 충족을 위한 이미지 스타일링 */
+    max-height: 200px; 
+    object-fit: cover;
+}
+
+.intro-image {
+    width: 45%;
+    display: inline-block;
+}
+
+.project-image {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* 텍스트 스타일 */
+.intro-text, .footer-text {
+    text-align: center;
+    padding: 0 10%;
+}
+
+.footer-text {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 30px;
+}
+
+.skill-list li {
+    margin-bottom: 5px;
+    color: #007BFF;
+}
