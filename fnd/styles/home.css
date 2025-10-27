@@ -1,0 +1,180 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #FFF2E0;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #A2AADB;
+  color: white;
+  padding: 1.5rem 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* ===== 조 소개 ===== */
+.intro {
+  padding: 2rem;
+  background-color: #C0C9EE;
+  color: white;
+  border-radius: 20px;
+  width: 80%;
+  margin: 2rem auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.intro h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.intro p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ===== 슬라이드 ===== */
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 90%;
+  margin: 2rem auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.slide-container {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  background-color: #A2AADB;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.slide img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #898AC4;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  margin: 1rem;
+}
+
+button {
+  background-color: #898AC4;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+}
+
+button:hover {
+  background-color: #6c6db5;
+}
+
+/* ===== 참여하기 버튼 ===== */
+.join-btn {
+  margin: 3rem auto;
+  background-color: #898AC4;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.join-btn:hover {
+  background-color: #6c6db5;
+}
+
+/* ===== 모달 ===== */
+.modal-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #C0C9EE;
+  color: white;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+.modal h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.modal label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  background-color: #898AC4;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #6c6db5;
+}
