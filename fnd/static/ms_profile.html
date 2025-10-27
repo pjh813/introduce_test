@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #C7B8EA;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      text-align: center;
+    }
+
+    /* 네비게이션 */
+    .navbar {
+      background-color: #7A6BF5;
+      padding: 15px;
+      border-radius: 0 0 20px 20px;
+    }
+    .navbar a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .navbar a:hover {
+      color: #F7C6D9;
+    }
+    img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-top: 30px;
+      object-fit: cover;
+      border: 5px solid #fff;
+    }
+
+    table {
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.8);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px 25px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #F7C6D9;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="ms_home.html">Home</a>
+    <a href="ms_profile.html">Profile</a>
+    <a href="ms_etc.html">Etc</a>
+  </div>
+
+  <!-- 통일된 타이틀 -->
+  <h1 class="page-title">My Profile</h1>
+
+  <img src="./../img/minsu/me.jpg" alt="내 사진">
+
+  <table>
+    <tr><th>이름</th><td>김민수</td></tr>
+    <tr><th>전공</th><td>컴퓨터공학</td></tr>
+    <tr><th>MBTI</th><td>ISFP</td></tr>
+    <tr><th>관심 분야</th><td>백엔드 개발자, 게임 개발</td></tr>
+    <tr><th>목표</th><td>취업하기!</td></tr>
+  </table>
+</body>
+</html>
