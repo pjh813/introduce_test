@@ -1,0 +1,43 @@
+name: Netlify Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - feature/minsu  
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 코드 가져오기
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설치 (필요 시)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3. 의존성 설치 (React/Vite 등 필요 시)
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 빌드 (React/Vite 등 필요 시)
+      # - name: Build project
+      #   run: npm run build
+      # HTML/Vanilla 프로젝트면 위 줄 삭제 가능
+
+      # 5. Netlify 배포
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: .      
+          #  
+          production-branch: 
+          - main
+          - feature/minsu
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
