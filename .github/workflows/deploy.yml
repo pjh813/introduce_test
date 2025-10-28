@@ -3,6 +3,7 @@ name: Netlify Deploy
 on:
   push:
     branches:
+      - main
       - feature/minsu  # feature/minsu 브랜치에 push될 때만 배포
 
 jobs:
