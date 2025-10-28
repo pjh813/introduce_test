@@ -1,0 +1,82 @@
+/* ===== 전체 배경 ===== */
+body {
+  background-color: #FFF2E0;
+}
+
+/* ===== 헤더 ===== */
+#mainHeader {
+  background-color: #A2AADB !important;
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== 조 소개 카드 ===== */
+#introCard {
+  background-color: #C0C9EE !important;
+  color: white !important;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== 슬라이더 ===== */
+.carousel-item {
+  padding: 2rem 0;
+  background-color: #A2AADB;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.carousel-item img {
+  border: 4px solid #898AC4;
+}
+
+/* ===== 버튼 ===== */
+.btn {
+  background-color: #898AC4;
+  color: white;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background-color: #6c6db5;
+  transform: translateY(-2px);
+}
+
+/* ===== 모달 ===== */
+#modalCard {
+  background-color: #C0C9EE !important;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+#modalCard .form-control,
+#modalCard .form-select,
+#modalCard textarea {
+  background-color: rgba(255,255,255,0.9);
+  color: #333;
+}
+
+#modalCard .btn {
+  background-color: #898AC4;
+  color: white;
+}
+
+#modalCard .btn:hover {
+  background-color: #6c6db5;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 768px) {
+  .carousel-item img {
+    width: 120px;
+    height: 120px;
+  }
+
+  #introCard {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
