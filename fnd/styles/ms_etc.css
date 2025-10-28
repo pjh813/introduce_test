@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  background: linear-gradient(to bottom right, #A7D8F0, #F7C6D9, #FFF3B0);
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  background-color: rgba(255,255,255,0.8) !important;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.navbar-brand {
+  color: #7A6BF5 !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.nav-link {
+  color: #444 !important;
+  font-weight: 600;
+}
+.nav-link:hover {
+  color: #7A6BF5 !important;
+  transition: color 0.3s;
+}
+
+/* Section Common */
+section {
+  padding: 80px 0;
+  position: relative;
+  animation: fadeIn 1.2s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  color: #6D63E0;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 2rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #6D63E0;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Card */
+.card {
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  background: white;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.card img {
+  border-radius: 18px 18px 0 0;
+  object-fit: cover;
+  height: 220px;
+  transition: transform 0.4s ease;
+}
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* Carousel */
+/* ===== Carousel 크기 조정 ===== */
+#teamCarousel {
+  max-width: 700px; /* 원하는 최대 폭으로 줄이기 */
+  margin: 0 auto;   /* 가운데 정렬 */
+}
+
+/* ===== Carousel 링크 스타일 ===== */
+.carousel-item a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: white !important;           /* 글자 색 흰색 */
+  display: block;         /* 이미지+텍스트 전체 클릭 가능 */
+}
+
+.carousel-item a:hover {
+  color: white !important;           /* 마우스 오버해도 흰색 유지 */
+  text-decoration: none;  /* 밑줄 안 생기도록 */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(4, 0, 35, 0.8); /* 보라색 반투명 */
+  border-radius: 50%;  /* 원형 */
+  background-size: 50% 50%;
+}
+
+/* Section Backgrounds */
+.hobby-section {
+  background: rgba(255,255,255,0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  padding: 60px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.travel-section {
+  background: rgba(255,255,255,0.25);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  padding: 60px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Fade-in Animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

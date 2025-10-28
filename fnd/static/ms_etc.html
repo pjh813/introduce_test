@@ -3,35 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <title>Etc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./../styles/ms_etc.css">
 </head>
-<body style="background-color:#FFF3B0; font-family:'Segoe UI',sans-serif; text-align:center; margin:0;">
 
-  <div style="background-color:#F7C6D9; padding:15px; border-radius:0 0 20px 20px;">
-    <a href="ms_home.html" style="margin:0 15px; color:#333; text-decoration:none; font-weight:bold;">Home</a>
-    <a href="ms_profile.html" style="margin:0 15px; color:#333; text-decoration:none; font-weight:bold;">Profile</a>
-    <a href="ms_etc.html" style="margin:0 15px; color:#333; text-decoration:none; font-weight:bold;">Etc</a>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">Minsu’s Page</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="ms_home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="ms_profile.html">Profile</a></li>
+          <li class="nav-item"><a class="nav-link active" href="ms_etc.html">Etc</a></li>
+          <li class="nav-item"><a class="nav-link" href="ms_contact.html">Contack</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5 pt-5">
+
+    <section class="hobby-section fade-in">
+      <h2 class="section-title">About Me</h2>
+      <div id="hobbyCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <div class="row justify-content-center">
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/game.jpg" class="card-img-top" alt="게임">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">게임</h5>
+                    <p class="card-text">오버워치2, 롤체, 스팀 게임 등 다양한 장르를 즐겨요. 사진은 인형뽑기 게임해서 뽑았습니다</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/photo.jpg" class="card-img-top" alt="풍경 사진">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">올해 벚꽃</h5>
+                    <p class="card-text">올해 봄에 찍은 벚꽃 사진입니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/cat.jpg" class="card-img-top" alt="고양이">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">고양이</h5>
+                    <p class="card-text">캣카페 가서 찍었던 고양이 사진</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row justify-content-center">
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/drawing.jpg" class="card-img-top" alt="그림">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">그림</h5>
+                    <p class="card-text">가볍게 낙서하는 걸 즐겨서 친구가 그려준 저입니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/back.jpg" class="card-img-top" alt="박물관">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">박물관 사진</h5>
+                    <p class="card-text">친구랑 놀러다니는 걸 즐깁니다. 국립중앙박물관에서 찍었습니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="./../img/minsu/cubcake.jpg" class="card-img-top" alt="컵케이크">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">누가 제일 잘 꾸미나</h5>
+                    <p class="card-text">컵케이크로 친구들끼리 누가 제일 잘 했나 내기를 했어요</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#hobbyCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hobbyCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
   </div>
 
-  <h1 style="color:#7A6BF5; margin-top:30px;">🎨 취미와 관심사</h1>
-
-  <div style="margin-top:40px;">
-    <h2 style="color:#555;">🎮 게임</h2>
-    <img src="./../img/minsu/game.jpg" style="width:250px; border-radius:15px; margin:10px;">
-    <p style="color:#444;">게임을 좋아해요!<br>
-    최근 관심 게임 : 오버워치2, 롤체, 스팀 게임</p>
-  </div>
-
-  <div style="margin-top:40px;">
-    <h2 style="color:#555;">📸 사진 촬영</h2>
-    <img src="./../img/minsu/photo.jpg" style="width:250px; border-radius:15px; margin:10px;">
-    <p style="color:#444;">풍경이나 음식 사진을 종종 찍어요.</p>
-  </div>
-
-  <div style="margin-top:40px;">
-    <h2 style="color:#555;">🎨 그림 그리기 </h2>
-    <img src="./../img/minsu/drawing.jpg" style="width:250px; border-radius:15px; margin:10px;">
-    <p style="color:#444;">가끔 낙서하는 걸 좋아해요 </p>
-  </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
